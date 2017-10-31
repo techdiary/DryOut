@@ -8,12 +8,15 @@ import { FlexLayoutModule} from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { MaterialModule} from './material/material.module';
 import { ShoutComponent } from './shout/shout.component';
+import { ListnerComponent } from './listner/listner.component';
+import { ShoutService} from './shout.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShoutComponent
+    ShoutComponent,
+    ListnerComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { ShoutComponent } from './shout/shout.component';
     FlexLayoutModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ShoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

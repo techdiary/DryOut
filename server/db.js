@@ -60,7 +60,7 @@ DB.prototype.connect = function(uri) {
         )
     }
   })
-}
+};
 
 DB.prototype.close = function() {
 
@@ -78,4 +78,6 @@ DB.prototype.close = function() {
         }
       )
   }
-}
+};
+
+module.exports = DB;

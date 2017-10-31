@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {ShoutService} from '../shout.service';
 
 @Component({
   selector: 'app-shout',
   templateUrl: './shout.component.html',
   styleUrls: ['./shout.component.css']
 })
-export class ShoutComponent implements OnInit {
+export class ShoutComponent{
+  message;
 
-  constructor() { }
+  constructor(private shoutService: ShoutService) {}
 
-  ngOnInit() {
+  sendMessage() {
+    this.shoutService.sendMessage(this.message);
+    this.message = '';
   }
 
 }

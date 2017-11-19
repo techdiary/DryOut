@@ -9,18 +9,23 @@ export class ShoutService {
   private url = 'http://localhost:3000';
   private socket;
 
+  addUser(username) {
+    console.log( username + ' Logged in');
+    this.socket.emit('add-user', username);
+  }
+
   sendMessage(message) {
     this.socket.emit('add-message', message);
   }
 
   getMessage() {
-    let observable = new Observable( observer => {
-      this.socket = io(this.url);
+    const observable = new Observable( observer => {
+      this.socket = io();
       this.socket.on('message', (data) => {
         observer.next(data);
       });
       return () => {
-        this.socket.disconnet();
+        this.socket.close();
       };
     });
     return observable;

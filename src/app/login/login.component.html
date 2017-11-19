@@ -1,0 +1,18 @@
+<div fxLayoutAlign="center center" style="margin-top: 40px">
+  <mat-tab-group>
+  <mat-tab label="Login">
+    <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="center center" novalidate>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Email" formControlName="email" >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary"> Log in </button>
+    </form>
+  </mat-tab>
+  <mat-tab label="Signup">
+    <app-signup></app-signup>
+  </mat-tab>
+</mat-tab-group>
+</div>

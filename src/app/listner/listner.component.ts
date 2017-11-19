@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { ShoutService} from '../shout.service';
 
 @Component({
@@ -6,7 +6,8 @@ import { ShoutService} from '../shout.service';
   templateUrl: './listner.component.html',
   styleUrls: ['./listner.component.css']
 })
-export class ListnerComponent implements OnInit, OnDestroy {
+export class ListnerComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   connection;
   messages= [];
   constructor( private shoutService: ShoutService) { }
@@ -16,7 +17,14 @@ export class ListnerComponent implements OnInit, OnDestroy {
       this.messages.push(message);
     });
   }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
   ngOnDestroy() {
     this.connection.unsubscribe();
+  }
+
+  scrollToBottom(): void {
+    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
   }
 }

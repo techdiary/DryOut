@@ -1,20 +1,19 @@
 <div class="menuBar">
-  <mat-toolbar color="primary">
-    <span><mat-icon style="font-size: 2em">code</mat-icon></span>
-    <span style="font-size: 2em; color: chocolate"><b>DryOut</b></span>
+  <nav>
+    <mat-toolbar color="primary">
+      <span routerLink="/"><mat-icon style="font-size: 2em">code</mat-icon></span>
+      <span style="font-size: 2em; color: chocolate" routerLink="/"><b>DryOut</b></span>
 
-    <button mat-icon-button [mat-menu-trigger-for]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </mat-toolbar>
-  <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item>Login/Sign Up</button>
-    <button mat-menu-item>About</button>
-  </mat-menu>
+      <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-menu x-position="before" #menu="matMenu">
+      <button mat-menu-item routerLink="/login" routerLinkActive="active">Login/Sign Up</button>
+      <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
+    </mat-menu>
+  </nav>
 </div>
-<div class="shoutBox" fxLayout="column">
-  <app-shout></app-shout>
-</div>
-<div class="listenBox">
-  <app-listner></app-listner>
-</div>
+<router-outlet></router-outlet>
+
+

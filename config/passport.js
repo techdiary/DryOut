@@ -11,7 +11,7 @@ module.exports= function (passport) {
   });
 
 //Used to deserialize user
-passport.deserializeUser( function (id, done) {
+  passport.deserializeUser( function (id, done) {
   User.findById(id, function (err, user) {
     done(err, user);
   });
@@ -58,4 +58,36 @@ passport.deserializeUser( function (id, done) {
         });
       });
     }));
+
+  // ============ LOCAL LOGIN =========
+// we are using named strategies since we have one for login and one for signup
+// by default, if there was no name, it would just be called 'local'
+
+  passport.use('local-login', new LocalStratergy({
+    //  By default, local strategy uses username but we will override with email
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true // Allow you to pass back the entire request to callback
+  },
+    function (req, email, password, done) {// Callback with email and password from out form
+    //  Find a user whose email is same as the forms email
+    //  we are checking if user trying to login already exists
+      User.findOne( {'local.email': email}, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done( null, false, {message: 'No user found'});
+        }
+        if(!user.validPassword(password))
+          return done( null, false, { message: 'Oops! Wrong password!'});
+
+      //  All is well, return user
+        return done(null, user);
+      });
+    }
+    ));
 };
+
+
+

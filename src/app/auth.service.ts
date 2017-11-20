@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/shareReplay';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
@@ -13,7 +14,10 @@ export class AuthService {
   login(email: string, password: string) {
 
     return this.http.post('/api/login', {email, password})
-      .shareReplay();
+      .map( (res) => res )
+      .catch( (error: any) => {
+        return Observable.throw( error.toString() || ': Server Error');
+      });
   }
 
   signup(email, password) {

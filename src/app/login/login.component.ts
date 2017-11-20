@@ -24,15 +24,15 @@ export class LoginComponent {
     });
   }
 
-  // login() {
-  //   const val = this.loginForm.value;
-  //
-  //   if ( val.email && val.password) {
-  //     this.authService.login( val.email, val.password)
-  //       .subscribe( result => {
-  //         console.log(result);
-  //       });
-  //   }
-  // }
+  login() {
+    const val = this.loginForm.value;
+
+    if ( val.email && val.password) {
+      this.authService.login( val.email, val.password)
+        .subscribe( (result) => {
+          console.log('User Signed in: ', result);
+        });
+    }
+  }
 
 }

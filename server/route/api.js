@@ -13,7 +13,21 @@ router.get( '/', (req, res) => {
   res.json(testObject);
 } );
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local-login',
+    function (err, user, info) {
+      if (err) {
+        res.status(401);
+        return next(err);
+      }
+      if(!user) {
+        res.status(401);
+        res.json(info.message);
+        return next();
+      }
+      //TODO: Send an Object
+      res.json(`Email: ${user.local.email} Successfully logged in.`)
+    })(req, res, next);
 });
 
 router.post('/signup', function (req, res, next) {

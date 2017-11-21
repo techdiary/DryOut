@@ -9,6 +9,7 @@ import { MaterialModule} from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { ShoutComponent } from './shout/shout.component';
+import { DialogOverviewComponent } from './shout/shout.component';
 import { ListnerComponent } from './listner/listner.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { LoginComponent } from './login/login.component';
@@ -28,7 +29,8 @@ import { SignupComponent } from './signup/signup.component';
     PageNotFoundComponent,
     LoginComponent,
     AboutComponent,
-    SignupComponent
+    SignupComponent,
+    DialogOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { SignupComponent } from './signup/signup.component';
     FlexLayoutModule,
     BrowserAnimationsModule,
     AppRoutingModule
+  ],
+  entryComponents: [
+    DialogOverviewComponent
   ],
   providers: [ShoutService],
   bootstrap: [AppComponent]

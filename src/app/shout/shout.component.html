@@ -1,14 +1,21 @@
-<div class="shoutField" fxLayout="column" fxLayoutGap="10px">
-  <div class="shoutForm">
-    <mat-form-field  hintLabel="Max 250 characters" >
-    <textarea [(ngModel)]="message" matInput placeholder="Shout" #input validate></textarea>
-    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
-  </mat-form-field>
+<ng-container *ngIf="!nickname">
+  <button mat-raised-button (click)="openDialog()">Enter Nickname</button>
+</ng-container>
+<ng-container *ngIf="nickname">
+  <p>You Chose: {{nickname}}</p>
+  <div class="shoutField" fxLayout="column" fxLayoutGap="10px">
+    <div class="shoutForm">
+      <mat-form-field  hintLabel="Max 250 characters" >
+        <textarea [(ngModel)]="message" matInput placeholder="Shout" #input validate></textarea>
+        <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="shoutButton" fxFlexAlign="center">
+      <button mat-raised-button color="primary" (click)="sendMessage()"><mat-icon>looks</mat-icon> Shout!!</button>
+    </div>
   </div>
-  <div class="shoutButton" fxFlexAlign="center">
-    <button mat-raised-button color="primary" (click)="sendMessage()"><mat-icon>looks</mat-icon> Shout!!</button>
+  <div class="listenBox">
+    <app-listner></app-listner>
   </div>
-</div>
-<div class="listenBox">
-  <app-listner></app-listner>
-</div>
+</ng-container>
+

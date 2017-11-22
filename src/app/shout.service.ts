@@ -7,11 +7,10 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class ShoutService {
   private url = 'http://localhost:3000';
-  private socket;
+  private socket = io();
 
-  addUser(username) {
-    console.log( username + ' Logged in');
-    this.socket.emit('add-user', username);
+  sendNickname(name) {
+    this.socket.emit('send-nickname', name);
   }
 
   sendMessage(message) {
@@ -20,7 +19,6 @@ export class ShoutService {
 
   getMessage() {
     const observable = new Observable( observer => {
-      this.socket = io();
       this.socket.on('message', (data) => {
         observer.next(data);
       });

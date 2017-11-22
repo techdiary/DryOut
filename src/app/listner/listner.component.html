@@ -1,7 +1,10 @@
 <div class="listenerContent">
   <div #scrollMe class ="table">
       <ng-container *ngFor="let message of messages">
-        <mat-card class="listenerBox" fxFlex>{{message.text}}</mat-card>
+        <mat-card class="listenerBox" fxFlex>
+          <mat-card-title>{{message.name}}</mat-card-title>
+          <mat-card-content>{{message.text}}</mat-card-content>
+        </mat-card>
       </ng-container>
   </div>
 </div>

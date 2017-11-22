@@ -28,8 +28,9 @@ export class ShoutComponent{
       data: { name: this.nickname }
     });
     dialogRef.afterClosed().subscribe( result => {
-      console.log('Dialog was clossed');
       this.nickname = result;
+      this.shoutService.sendNickname(this.nickname);
+      console.log('Dialog was closed', result);
     });
   };
 }
@@ -59,7 +60,6 @@ export class ShoutComponent{
         <button mat-button [mat-dialog-close]="data.nickname" tabindex="2">Ok</button>
         <button mat-button (click)="onNoClick()" tabindex="1">No</button>
       </div>
-      {{data.nickname}}
     </div>
   `,
 })

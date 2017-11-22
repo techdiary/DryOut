@@ -63,6 +63,12 @@ let users = [];
 io.on('connection', (socket)=> {
   console.log('A User Connected', socket.id);
 
+  socket.on('send-nickname', function (nickname) {
+    socket.nickname= nickname;
+    users.push(socket.nickname);
+    console.log(users);
+  });
+
   socket.on('disconnect', () =>{
     console.log('A User Disconnected');
   });
@@ -72,7 +78,7 @@ io.on('connection', (socket)=> {
 
     //storing variable
     socket.username = username;
-    users[socket.username] = socket.id;
+    users[socket.id] = socket.username;
   //  Tell everyone
     socket.broadcast.emit( 'broadcast', {description: username + ' Logged in'});
 
@@ -82,7 +88,7 @@ io.on('connection', (socket)=> {
   });
 
   socket.on('add-message', (message) => {
-    io.emit('message', {type: 'new-message', text: message})
+    io.emit('message', { text: message, name: socket.nickname})
   });
 
   socket.on('typing', () => {

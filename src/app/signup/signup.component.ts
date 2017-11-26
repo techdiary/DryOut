@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,8 @@ export class SignupComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -34,8 +36,8 @@ export class SignupComponent {
         .subscribe(
           (data) => {
             console.log('User registered', data);
-          }
-        );
+            this.router.navigate(['login']);
+          });
     }
   }
 

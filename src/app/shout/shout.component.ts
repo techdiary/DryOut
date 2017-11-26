@@ -8,27 +8,30 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
   templateUrl: './shout.component.html',
   styleUrls: ['./shout.component.css']
 })
-export class ShoutComponent{
+export class ShoutComponent implements OnInit {
   message;
   nickname: string;
 
   constructor(private shoutService: ShoutService,
-              public dialog: MatDialog) {}
+              public dialog: MatDialog) { }
+
+  ngOnInit() {
+    this.shoutService.reconnect();
+  }
   // Take nickname before rendering other component
-
-
   sendMessage() {
     this.shoutService.sendMessage(this.message);
     this.message = '';
   }
 
-  openDialog(): void {
+  openDialog() {
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
       width: '250px',
       data: { name: this.nickname }
     });
     dialogRef.afterClosed().subscribe( result => {
       this.nickname = result;
+      localStorage.setItem('nickname', this.nickname);
       this.shoutService.sendNickname(this.nickname);
       console.log('Dialog was closed', result);
     });

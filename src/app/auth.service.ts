@@ -27,4 +27,21 @@ export class AuthService {
         return Observable.throw( error.toString() || ':server error');
       });
   }
+
+  // Get user information if logged in
+  getUser() {
+    return this.http.get('/api/user')
+      .map( (res) => res)
+      .catch( (error: any) => {
+        return Observable.throw( error.toString() || ' :server error');
+    });
+  }
+
+  logout() {
+    return this.http.get('/api/logout')
+      .map( (res) => res)
+      .catch( (error: any) => {
+        return Observable.throw( error.toString() || ':server error');
+      });
+  }
 }

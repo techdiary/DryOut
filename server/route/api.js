@@ -26,7 +26,10 @@ router.post('/login', (req, res, next) => {
         return next();
       }
       //TODO: Send an Object
-      res.json(`Email: ${user.local.email} Successfully logged in.`)
+      req.logIn(user, function (err) {
+        if (err) {return next(err);}
+        res.json(`Email: ${user.local.email}`)
+      })
     })(req, res, next);
 });
 
@@ -45,5 +48,18 @@ router.post('/signup', function (req, res, next) {
     })(req, res, next);
 });
 
+router.get('/user', (req, res, next) => {
+  if( req.isAuthenticated() ) {
+    console.log('user already logged in');
+    res.json(req.user);
+  } else {
+    res.json('Log in');
+  }
+});
+
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.json('Logged Out');
+})
 
 module.exports = router;

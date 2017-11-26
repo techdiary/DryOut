@@ -9,6 +9,9 @@ export class ShoutService {
   private url = 'http://localhost:3000';
   private socket = io();
 
+  reconnect() {
+    this.socket.open();
+  }
   sendNickname(name) {
     this.socket.emit('send-nickname', name);
   }

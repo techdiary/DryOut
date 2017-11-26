@@ -9,6 +9,9 @@
       </button>
     </mat-toolbar>
     <mat-menu x-position="before" #menu="matMenu">
+      <ng-container *ngIf="!!username">
+        <button mat-menu-item (click)="logout()" routerLinkActive="active">Logout</button>
+      </ng-container>
       <button mat-menu-item routerLink="/login" routerLinkActive="active">Login/Sign Up</button>
       <button mat-menu-item routerLink="/about" routerLinkActive="active">About</button>
     </mat-menu>

@@ -2,15 +2,18 @@
   <button mat-raised-button (click)="openDialog()" fxLayoutAlign="center">Enter Nickname</button>
 </ng-container>
 <ng-container *ngIf="nickname">
+
   <div class="shoutField" fxLayout="column" fxLayoutGap="10px">
-    <div class="shoutForm">
-      <mat-form-field  hintLabel="Max 250 characters" >
-        <textarea [(ngModel)]="message" matInput placeholder="Shout" #input validate maxlength="250"></textarea>
-        <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
-      </mat-form-field>
-    </div>
-    <div class="shoutButton" fxFlexAlign="center">
-      <button mat-raised-button color="primary" (click)="sendMessage()"><mat-icon>looks</mat-icon> Shout!!</button>
+      <div class="shoutForm">
+        <mat-form-field  hintLabel="Max 250 characters" >
+          <textarea [(ngModel)]="message" matInput placeholder="Shout" maxlength="250" minlength="10"  #input ></textarea>
+          <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="shoutButton" fxFlexAlign="center">
+      <button  mat-raised-button color="primary" (click)="sendMessage()" (keyup.enter)="sendMessage()">
+        <mat-icon>looks</mat-icon> Shout!!
+      </button>
     </div>
   </div>
   <div class="listenBox">

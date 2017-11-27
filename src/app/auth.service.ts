@@ -20,8 +20,8 @@ export class AuthService {
       });
   }
 
-  signup(email, password) {
-    return this.http.post('/api/signup', { email, password})
+  signup(email, password, username) {
+    return this.http.post('/api/signup', { email, password, username})
       .map( (res) => res)
       .catch( (error: any) => {
         return Observable.throw( error.toString() || ':server error');

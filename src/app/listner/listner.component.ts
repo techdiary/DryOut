@@ -8,7 +8,6 @@ import { ShoutService} from '../shout.service';
 })
 export class ListnerComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-  nickname: string = localStorage.getItem('nickname');
   connection;
   messages= [];
   constructor( private shoutService: ShoutService) { }

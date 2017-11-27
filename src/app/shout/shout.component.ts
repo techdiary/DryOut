@@ -2,6 +2,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ShoutService} from '../shout.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-shout',
@@ -13,10 +14,19 @@ export class ShoutComponent implements OnInit {
   nickname: string;
 
   constructor(private shoutService: ShoutService,
+              private authService: AuthService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
     this.shoutService.reconnect();
+    this.authService.getUser().subscribe(
+      (data) => {
+        if (data !== null) {
+          this.nickname = data.local.username.toString();
+          this.shoutService.sendNickname(this.nickname);
+          console.log(this.nickname);
+        }
+      });
   }
   // Take nickname before rendering other component
   sendMessage() {

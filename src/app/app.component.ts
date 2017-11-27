@@ -15,17 +15,19 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.getUser().subscribe(
       (data) => {
-        this.username = data.local.email.toString();
-        console.log(data.local.email);
+        if (data !== null) {
+          this.username = data.local.username;
+        }
       });
   }
 
   logout() {
     this.authService.logout().subscribe(
       (data) => {
-        this.username = ''
+        this.username = '';
         this.message = data.toString();
         console.log(data);
+        location.reload();
       });
   }
 }

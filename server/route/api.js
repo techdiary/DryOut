@@ -53,7 +53,7 @@ router.get('/user', (req, res, next) => {
     console.log('user already logged in');
     res.json(req.user);
   } else {
-    res.json('Log in');
+    res.json(null);
   }
 });
 

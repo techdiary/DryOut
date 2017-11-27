@@ -32,7 +32,7 @@ export class SignupComponent {
     const val = this.signupForm.value;
 
   if (val.email && val.username && val.password) {
-      this.authService.signup( val.email, val.password)
+      this.authService.signup( val.email, val.password, val.username)
         .subscribe(
           (data) => {
             console.log('User registered', data);

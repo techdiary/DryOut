@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 
 @Component({
@@ -13,7 +14,8 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor( private fb: FormBuilder,
+  constructor( public snackBar: MatSnackBar,
+               private fb: FormBuilder,
                private authService: AuthService,
                private  router: Router) {
     this.createForm();
@@ -33,7 +35,7 @@ export class LoginComponent {
       this.authService.login( val.email, val.password)
         .subscribe( (result) => {
           console.log('User Logged in as: ', result);
-          alert(`You have successfully logged in as ${result} `);
+          this.snackBar.open('Successfully Logged in.', null, { duration: 2000});
           this.router.navigateByUrl('/');
         });
     }

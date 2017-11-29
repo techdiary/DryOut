@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-signup',
@@ -13,6 +14,7 @@ export class SignupComponent {
   signupForm: FormGroup;
 
   constructor(
+    public snackBar: MatSnackBar,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -36,7 +38,8 @@ export class SignupComponent {
         .subscribe(
           (data) => {
             console.log('User registered', data);
-            this.router.navigate(['login']);
+            this.snackBar.open('Successfully Registered', null, { duration: 2000});
+            this.router.navigateByUrl('/');
           });
     }
   }
